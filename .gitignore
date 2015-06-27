@@ -6,6 +6,15 @@
 *.user
 *.sln.docstates
 
+#python compiled
+*.pyc
+
+#test result
+processemail/emails
+
+#virtual environments
+env/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -159,7 +168,6 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/
-bower_components/
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -188,3 +196,16 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+#django virtual environment
+/env/
+*.pyc
+/staticfiles/
+/searchengine/index_bulk/
+/locations/community/
+/locations/error/
+/locations/imported/
+/locations/places_data/
+*.pdf
+*.pyproj
+*.pid

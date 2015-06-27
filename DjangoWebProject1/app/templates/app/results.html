@@ -1,0 +1,46 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="content clearfix">
+    {% for each in response %}
+   <div class="item-details">
+      <table class="table table-hover">
+         <tbody>
+            <tr>
+                <td><h2>&nbsp;Combo deal {{ forloop.counter }}</h2></td>
+                <td></td>
+                <td><h2>&#8364;{{ each.total }}</h2> excluded tax</td>
+            </tr>
+            <tr>
+               <td >
+                  <img>
+               </td>
+               <td>
+                  <h2>{{ each.hotel1.code }}</h2>
+                  <div>
+                     <span>4 Stars</span>
+                  </div>
+               </td>
+               <td>&#8364;{{ each.hotel1.lowrate }} per day<br/>
+               </td>
+            </tr>
+            <tr>
+               <td >
+                  <img>
+               </td>
+               <td>
+                  <h2>{{ each.hotel2.code }}</h2>
+                  <div>
+                     <span>4 Stars</span>
+                  </div>
+               </td>
+               <td>&#8364;{{ each.hotel2.lowrate }} per day<br>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+    {% endfor %}
+</div>
+{% endblock %}
