@@ -30,7 +30,7 @@ def contact(request):
         context_instance = RequestContext(request,
         {
             'title':'Contact',
-            'message':'Your contact page.',
+            'message':'We always care about you',
             'year':datetime.now().year,
         })
     )
@@ -44,7 +44,7 @@ def about(request):
         context_instance = RequestContext(request,
         {
             'title':'About',
-            'message':'Your application description page.',
+            'message':'Plan you stay smartly.',
             'year':datetime.now().year,
         })
     )
