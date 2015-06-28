@@ -7,15 +7,15 @@
    <div class="item-details">
       <table class="table table-hover">
          <tbody>
-            <tr style="background-color:aquamarine">
+            <tr style="background-color:lightskyblue">
                 <td><h2>&nbsp;Combo deal {{ forloop.counter }}</h2></td>
                 <td></td>
-                <td><h2>&#8364;{{ each.total }} <br /><small>excluded tax</small></h2></td>
+                <td><h2>&#8364;{{ each.total }} <small>excluded tax</small></h2></td>
                 <td width="150px"><button class="btn-lg btn-primary">Book Now</button></td>
             </tr>
             <tr>
                <td >
-                  {% if each.hotel1.img %}<img src="{% static 'app/media/' %}{{ each.hotel1.img }}">
+                  {% if each.hotel1.img %}<img class="img-responsive" src="{% static 'app/media/' %}{{ each.hotel1.img }}">
                   {% else %}<img src="{% static 'app/images/missing.jpg' %}">{% endif %}
                </td>
                <td width="40%">
@@ -24,13 +24,13 @@
                      <p>{{ each.hotel1.desc }}</p>
                   </div>
                </td>
-               <td>&#8364;{{ each.hotel1.lowrate }} per day<br/>
+               <td><br />&#8364;{{ each.hotel1.lowrate }} per day<br/>
                </td>
                <td></td>
             </tr>
             <tr>
                <td >
-                  {% if each.hotel2.img %}<img src="{% static 'app/media/' %}{{ each.hotel2.img }}">
+                  {% if each.hotel2.img %}<img class="img-responsive" src="{% static 'app/media/' %}{{ each.hotel2.img }}">
                   {% else %}<img src="{% static 'app/images/missing.jpg' %}">{% endif %}
                </td>
                <td>
@@ -39,7 +39,7 @@
                      <p>{{ each.hotel1.desc }}</p>
                   </div>
                </td>
-               <td>&#8364;{{ each.hotel2.lowrate }} per day<br>
+               <td><br />&#8364;{{ each.hotel2.lowrate }} per day<br>
                </td>
                <td></td>
             </tr>
