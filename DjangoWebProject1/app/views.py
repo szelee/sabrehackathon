@@ -92,6 +92,8 @@ def result(request):
 				hotel2 = {'code': day2['hotelCode'],'name': day2['hotelName'], 'rating':day2['starRating'],'lowrate': day2['minRate'],'img':img,'desc': desc[0]['para']}
 				hotel_permutation = { 'hotel1': hotel1, 'hotel2': hotel2, 'total': day1['minRate'] + day2['minRate']}
 				hotel_list.append(hotel_permutation)
+		
+		hotel_list = sorted(hotel_list, key=lambda k: k['total'])
 			
 	else:
 		url = "http://dev.jellyfishsurpriseparty.com/polygon/rates/" + country + "/" + '{:%Y-%m-%d}'.format(checkin_date) + "/" + '{:%Y-%m-%d}'.format(checkout_date)
