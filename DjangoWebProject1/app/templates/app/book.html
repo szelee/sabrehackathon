@@ -2,6 +2,36 @@
 
 {% block content %}
 {% load staticfiles %}
-<div class="container">
+<div class="container-fluid backgroundimg text-center">
+    <br />
+    <div class="displaybox-light">
+        <div class="container">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
+                <div class="row">
+                    <h2>Hotel Splitter Deal {{ combo_num }} - &#8364;{{ total }}</h2>
+                </div>
+                <div class="row text-center">
+                    <div class="text-center col-lg-push-4">
+                        {% if hotel1img != "False" %}<img src="{% static 'app/media/' %}{{ hotel1img }}">{% else %}<img src="{% static 'app/images/missing.jpg' %}">{% endif %}
+                        <h2>{{ hotel1 }} <br /><small>{{ hotel1rate }} stars</small></h2>
+                        <div>
+                            <p>{{ hotel1.desc }}</p>
+                        </div>
+                        <!--br />&#8364;{{ hotel1.lowrate }} per day<br /-->
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="text-center col-lg-push-4">{% if hotel2img != "False" %}<img  src="{% static 'app/media/' %}{{ hotel2img }}">{% else %}<img src="{% static 'app/images/missing.jpg' %}">{% endif %}</div>
+                    <h2>{{ hotel2 }} <br /><small>{{ hotel2rate }} stars</small></h2>
+                    <div>
+                        <p>{{ hotel1.desc }}</p>
+                    </div>
+                        <!--br />&#8364;{{ hotel2.lowrate }} per day<br-->
+                </div>
+            </div>
 
-{% endblock %}
+        </div>
+    </div>
+    <br />
+    <br />
+    {% endblock %}

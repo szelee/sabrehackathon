@@ -21,6 +21,14 @@ textarea {
     max-width: 280px;
 }
 
+.backgroundimg{
+    background: url(../images/background.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
@@ -232,6 +240,12 @@ section {
         margin-top: -30%;
         width:28%;
         margin-left:60%;
+    }
+
+    .displaybox-light{
+       width:70%;
+       margin-left:15%; ;
+       margin-right:20%;
     }
 
     .slide p {
@@ -494,6 +508,16 @@ footer {
     border-radius: 5px;
     padding: 20px;
     color: #ffffff;
+    z-index: 1;
+    vertical-align: middle;
+}
+
+.displaybox-light {
+    background:  rgba(242, 243, 242, 0.85);
+    border: 2px solid rgb(242, 243, 242);
+    border-radius: 5px;
+    padding: 20px;
+    color: #073658
     z-index: 1;
     vertical-align: middle;
 }

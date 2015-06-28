@@ -6,8 +6,9 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime, date, timedelta
-import requests
+import requests, json
 from app.models import HotelES
+from django.core import serializers
 
 def home(request):
     """Renders the home page."""
@@ -117,7 +118,9 @@ def result(request):
 		{
 			'title':'Hotel Splitter - Result',
 			'year':datetime.now().year,
-			'response': hotel_list
+			'response': hotel_list,
+			'checkout': checkout_date,
+			'checkin': checkin_date
 		})
 	)
 
@@ -135,3 +138,37 @@ def convertdate(datestring):
         return dateobj
     except:
         raise
+
+def book(request):
+	booking=""
+	combo_num = request.GET.get("combo#")
+	hotel1 = request.GET.get("hotel1")
+	hotel2 = request.GET.get("hotel2")
+	hotel1img= request.GET.get("hotel1img")
+	hotel2img = request.GET.get("hotel2img")
+	hotel1rate = request.GET.get("hotel1rate")
+	hotel2rate = request.GET.get("hotel2rate")
+	total = request.GET.get("total")
+	
+	print type(hotel1)
+	print type(hotel2)
+
+	assert isinstance(request, HttpRequest)
+	return render(
+		request,
+		'app/book.html',
+		context_instance = RequestContext(request,
+		{
+			'title':'Hotel Splitter - Booking',
+			'message':'We are working on your reservation',
+			'year':datetime.now().year,
+			'combo_num': combo_num,
+			'hotel1': hotel1,
+			'hotel2': hotel2,
+			'hotel1img': hotel1img,
+			'hotel2img': hotel2img,
+			'hotel1rate': hotel1rate,
+			'hotel2rate': hotel2rate,
+			'total': total
+		})
+	)
