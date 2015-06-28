@@ -79,7 +79,7 @@ def result(request):
 				img = data['@giataId'] + ".jpg"
 			else:
 				img = False
-			hotel1 = {'code': day1['hotelCode'], 'name': day1['hotelName'], 'rating':day1['starRating'],'lowrate': day1['minRate'], 'img':img,'desc': desc[0]['para']}
+			hotel1 = {'code': day1['hotelCode'], 'name': day1['hotelName'].title(), 'rating':day1['starRating'],'lowrate': day1['minRate'], 'img':img,'desc': desc[0]['para']}
 			k=0
 			for day2 in response[1]:
 				if k >10:
@@ -90,7 +90,7 @@ def result(request):
 					img = data['@giataId'] + ".jpg"
 				else:
 					img = False
-				hotel2 = {'code': day2['hotelCode'],'name': day2['hotelName'], 'rating':day2['starRating'],'lowrate': day2['minRate'],'img':img,'desc': desc[0]['para']}
+				hotel2 = {'code': day2['hotelCode'],'name': day2['hotelName'].title(), 'rating':day2['starRating'],'lowrate': day2['minRate'],'img':img,'desc': desc[0]['para']}
 				hotel_permutation = { 'hotel1': hotel1, 'hotel2': hotel2, 'total': day1['minRate'] + day2['minRate']}
 				hotel_list.append(hotel_permutation)
 		
@@ -106,7 +106,7 @@ def result(request):
 				img = data['@giataId'] + ".jpg"
 			else:
 				img = False
-			hotel1 = {'code': day1['hotelCode'], 'name': day1['hotelName'], 'rating':day1['starRating'],'lowrate': day1['minRate'],'img':img,'desc': desc[0]['para']}
+			hotel1 = {'code': day1['hotelCode'], 'name': day1['hotelName'].title(), 'rating':day1['starRating'],'lowrate': day1['minRate'],'img':img,'desc': desc[0]['para']}
 			hotel_permutation = { 'hotel1': hotel1, 'total': day1['minRate']}
 			hotel_list.append(hotel_permutation)
 

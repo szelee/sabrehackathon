@@ -4,7 +4,7 @@
 {% load staticfiles %}
 <div class="container-fluid">
 <div class="content clearfix">
-    <div><h4>Hotels in Amsterdam from {{ checkin }} to {{ checkout }}</h4></div>
+    <div><h4>Lowest price hotels in Amsterdam from {{ checkin }} to {{ checkout }}</h4></div>
     {% for each in response %}
    <div class="item-details">
        <form method="get" action="/book">
@@ -22,9 +22,9 @@
            <table class="table table-hover">
                <tbody>
                    <tr style="background-color:lightskyblue;vertical-align:text-top;">
-                       <td><h2>&nbsp;Hotel Splitter Deal {{ forloop.counter }}</h2></td>
+                       <td><h2>&nbsp;HotelSplitter Deal {{ forloop.counter }}</h2></td>
                        <td></td>
-                       <td><h3>&#8364;{{ each.total }} <small>excluded tax</small></h3></td>
+                       <td><h3>&#8364;{{ each.total|floatformat:"0" }} <small>excluded tax</small></h3></td>
                        <td width="150px"><button type="submit" class="btn-lg btn-primary">Book Now</button></td>
                    </tr>
                    <tr>
@@ -33,13 +33,14 @@
                            {% else %}<img src="{% static 'app/images/missing.jpg' %}">{% endif %}
                        </td>
                        <td width="40%">
-                           <h2>{{ each.hotel1.name }} <br /><small>{{ each.hotel1.rating }} stars</small></h2>
+                           <h2>{{ each.hotel1.name }} <br />{% if each.hotel1.rating %}<small class="label label-warning">{{ each.hotel1.rating }} stars</small>{% endif %}</h2>
                            <div>
                                <p>{{ each.hotel1.desc }}</p>
                            </div>
                        </td>
-                       <td>
-                           <br />&#8364;{{ each.hotel1.lowrate }} per day<br />
+                       <td><h4><br />Stay 1 night
+                           <br />Price &#8364;{{ each.hotel1.lowrate|floatformat:"0" }}<br />
+                           (&#8364;{{ each.hotel1.lowrate|floatformat:"0" }} per night)</h4>
                        </td>
                        <td></td>
                    </tr>
@@ -49,13 +50,14 @@
                            {% else %}<img src="{% static 'app/images/missing.jpg' %}">{% endif %}
                        </td>
                        <td>
-                           <h2>{{ each.hotel2.name }} <br /><small>{{ each.hotel2.rating }} stars</small></h2>
+                           <h2>{{ each.hotel2.name }} <br />{% if each.hotel2.rating %}<small class="label label-warning">{{ each.hotel2.rating }} stars</small>{% endif %}</h2>
                            <div>
                                <p>{{ each.hotel1.desc }}</p>
                            </div>
                        </td>
-                       <td>
-                           <br />&#8364;{{ each.hotel2.lowrate }} per day<br>
+                       <td><h4><br />Stay 1 night
+                           <br />Price &#8364;{{ each.hotel2.lowrate|floatformat:"0" }}<br>
+                           (&#8364;{{ each.hotel2.lowrate|floatformat:"0" }} per night)</h4>
                        </td>
                        <td></td>
                    </tr>
