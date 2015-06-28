@@ -149,6 +149,8 @@ def book(request):
 	hotel1rate = request.GET.get("hotel1rate")
 	hotel2rate = request.GET.get("hotel2rate")
 	total = request.GET.get("total")
+	checkin = request.GET.get("checkin")
+	checkout = request.GET.get("checkout")
 	
 	print type(hotel1)
 	print type(hotel2)
@@ -169,6 +171,8 @@ def book(request):
 			'hotel2img': hotel2img,
 			'hotel1rate': hotel1rate,
 			'hotel2rate': hotel2rate,
-			'total': total
+			'total': total,
+			'checkin': checkin,
+			'checkout': checkout
 		})
 	)

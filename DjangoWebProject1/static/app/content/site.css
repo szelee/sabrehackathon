@@ -21,6 +21,14 @@ textarea {
     max-width: 280px;
 }
 
+.backgroundimg{
+    background: url(../images/background.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
@@ -229,10 +237,15 @@ section {
         }
 
     .search {
-        width:25%;
-        text-align:center;
         margin-top: -30%;
-        margin-left: 60%;
+        width:28%;
+        margin-left:60%;
+    }
+
+    .displaybox-light{
+       width:80%;
+       margin-left:12%;
+       margin-right:12%;
     }
 
     .slide p {
@@ -495,6 +508,16 @@ footer {
     border-radius: 5px;
     padding: 20px;
     color: #ffffff;
+    z-index: 1;
+    vertical-align: middle;
+}
+
+.displaybox-light {
+    background:  rgba(242, 243, 242, 0.85);
+    border: 2px solid rgb(242, 243, 242);
+    border-radius: 5px;
+    padding: 20px;
+    color: #073658
     z-index: 1;
     vertical-align: middle;
 }

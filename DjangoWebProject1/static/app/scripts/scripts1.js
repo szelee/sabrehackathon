@@ -11,7 +11,9 @@ $(document).ready(function(){
 	var from_$input = $('#time-start').pickadate();
 	var from_picker = from_$input.pickadate('picker');
 
-	var to_$input = $('#time-end').pickadate();
+	var to_$input = $('#time-end').pickadate({
+		date_max:2
+	});
 	var to_picker = to_$input.pickadate('picker');
 
 	// Check if there�s a �from� or �to� date to start with.
