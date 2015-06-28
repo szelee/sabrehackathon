@@ -1,45 +1,57 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-
-<div class="content clearfix">
+{% load staticfiles %}
+<div class="container-fluid">
+<div>
     {% for each in response %}
    <div class="item-details">
+      <form>
       <table class="table table-hover">
          <tbody>
-            <tr>
+            <tr style="vertical-align:middle;background-color:powderblue;">
                 <td><h2>&nbsp;Combo deal {{ forloop.counter }}</h2></td>
                 <td></td>
-                <td><h2>&#8364;{{ each.total }}</h2> excluded tax</td>
+                <td><h2>&#8364;{{ each.total }} <small>excluded tax</small></h2> </td>
+                <td width="150px">
+                    <input type="hidden" name="hote1" value="{{ each.hote1 }}"/>
+                    <input type="hidden" name="hote1" value="{{ each.hote2 }}"/>
+                    <input type="submit" class="btn-lg btn-primary" formaction="/book?id1={{ each.hotel1.id }}&id2={{ each.hotel2.id }}" formmethod="get" value="Book Now" />
+                </td>
             </tr>
             <tr>
                <td >
-                  <img>
+                  {% if each.hotel1.img %}<img src="{% static 'app/media/' %}{{ each.hotel1.img }} ">
+                  {% else %}<img src="{% static 'app/images/missing.jpg' %}" />{% endif %}
                </td>
-               <td>
-                  <h2>{{ each.hotel1.code }}</h2>
+               <td width="40%">
+                  <h2>{{ each.hotel1.name }}<br /><small>{{ each.hotel1.rating }} stars</small></h2>
                   <div>
-                     <span>4 Stars</span>
+                     <p>{{ each.hotel1.desc }}</p>
                   </div>
                </td>
                <td>&#8364;{{ each.hotel1.lowrate }} per day<br/>
                </td>
+                <td></td>
             </tr>
             <tr>
                <td >
-                  <img>
+                  {% if each.hotel2.img %}<img src="{% static 'app/media/' %}{{ each.hotel2.img }}">
+                  {% else %}<img src="{% static 'app/images/missing.jpg' %}" />{% endif %}
                </td>
                <td>
-                  <h2>{{ each.hotel2.code }}</h2>
+                  <h2>{{ each.hotel2.name }}<br /><small>{{ each.hotel1.rating }} stars</small></h2>
                   <div>
-                     <span>4 Stars</span>
+                     <p>{{ each.hotel2.desc }}</p>
                   </div>
                </td>
                <td>&#8364;{{ each.hotel2.lowrate }} per day<br>
                </td>
+                <td></td>
             </tr>
          </tbody>
       </table>
+      </form>
    </div>
     {% endfor %}
 </div>

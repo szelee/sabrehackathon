@@ -229,7 +229,10 @@ section {
         }
 
     .search {
-        margin-top: -12%;
+        width:25%;
+        text-align:center;
+        margin-top: -30%;
+        margin-left: 60%;
     }
 
     .slide p {
