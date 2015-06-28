@@ -7,7 +7,6 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime, date, timedelta
 import requests
-from app.models import HotelES
 
 def home(request):
     """Renders the home page."""
@@ -50,23 +49,8 @@ def about(request):
         })
     )
 
-def book(request):
-    """Renders the booking page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/book.html',
-        context_instance = RequestContext(request,
-        {
-            'title':'Reservation',
-            'message':'Your application description page.',
-            'year':datetime.now().year,
-        })
-    )
-
 def result(request):
 	"""Get the result"""
-	es = HotelES()
 	checkin_date = convertdate(request.GET.get('in_date'))
 	checkout_date = convertdate(request.GET.get('out_date'))
 	days_diff = checkout_date - checkin_date
@@ -82,30 +66,11 @@ def result(request):
 			url.append("http://dev.jellyfishsurpriseparty.com/polygon/rates/" + country + "/" + '{:%Y-%m-%d}'.format(day[i]) + "/" + '{:%Y-%m-%d}'.format(day[day_value]))
 			response.append(requests.get(url[i]).json())
 		hotel_list=[]
-		print len(response[0])
-		print len(response[1])
-		i = 0
 		for day1 in response[0]:
-			if i == 10:
-				break
-			i+=1
-			data, desc = es.queryName(day1['hotelName'])
-			if "images" in data:
-				img = data["@giataId"] + ".jpg"
-			else:
-				img = False
-			hotel1 = {'id': day1['hotelCode'],'name': day1['hotelName'].lower().title(), 'lowrate': day1['minRate'], 'rating': day1['starRating'], 'img': img, 'desc': desc[0]['para']}
-			j=0
+			#print day1
+			hotel1 = {'code': day1['hotelCode'], 'lowrate': day1['minRate']}
 			for day2 in response[1]:
-				if j==10:
-					break
-				j+=1
-				data, desc = es.queryName(day2['hotelName'])
-				if "images" in data:
-					img = data["@giataId"] + ".jpg"
-				else:
-					img = False
-				hotel2 = {'id': day2['hotelCode'], 'name': day2['hotelName'].lower().title(), 'lowrate': day2['minRate'], 'rating': day1['starRating'], 'img': img, 'desc': desc[0]['para']}
+				hotel2 = {'code': day2['hotelCode'], 'lowrate': day2['minRate']}
 				hotel_permutation = { 'hotel1': hotel1, 'hotel2': hotel2, 'total': day1['minRate'] + day2['minRate']}
 				hotel_list.append(hotel_permutation)
 			
@@ -114,12 +79,7 @@ def result(request):
 		response = requests.get(url).json()
 
 		for day1 in response:
-			data, desc = es.queryName(day2['hotelName'])
-			if "images" in data:
-				img = data["@giataId"] + ".jpg"
-			else:
-				img = False
-			hotel1 = {'id': day1['hotelCode'],'name': day1['hotelName'].lower().title(), 'lowrate': day1['minRate'], 'rating': day1['starRating'], 'img': img, 'desc': desc[0]['para']}
+			hotel1 = {'code': day1['hotelCode'], 'lowrate': day1['minRate']}
 			hotel_permutation = { 'hotel1': hotel1, 'total': day1['minRate']}
 			hotel_list.append(hotel_permutation)
 
