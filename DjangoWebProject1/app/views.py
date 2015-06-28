@@ -7,6 +7,7 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime, date, timedelta
 import requests
+from app.models import HotelES
 
 def home(request):
     """Renders the home page."""
@@ -66,11 +67,29 @@ def result(request):
 			url.append("http://dev.jellyfishsurpriseparty.com/polygon/rates/" + country + "/" + '{:%Y-%m-%d}'.format(day[i]) + "/" + '{:%Y-%m-%d}'.format(day[day_value]))
 			response.append(requests.get(url[i]).json())
 		hotel_list=[]
+		j=0;		
 		for day1 in response[0]:
 			#print day1
-			hotel1 = {'code': day1['hotelCode'], 'lowrate': day1['minRate']}
+			if j > 10:
+				break
+			j+=1
+			data, desc = HotelES().getVenueName(day1['hotelName'])
+			if 'images' in data:
+				img = data['@giataId'] + ".jpg"
+			else:
+				img = False
+			hotel1 = {'code': day1['hotelCode'], 'name': day1['hotelName'], 'rating':day1['starRating'],'lowrate': day1['minRate'], 'img':img,'desc': desc[0]['para']}
+			k=0
 			for day2 in response[1]:
-				hotel2 = {'code': day2['hotelCode'], 'lowrate': day2['minRate']}
+				if k >10:
+					break
+				k+=1
+				data, desc = HotelES().getVenueName(day2['hotelName'])
+				if 'images' in data:
+					img = data['@giataId'] + ".jpg"
+				else:
+					img = False
+				hotel2 = {'code': day2['hotelCode'],'name': day2['hotelName'], 'rating':day2['starRating'],'lowrate': day2['minRate'],'img':img,'desc': desc[0]['para']}
 				hotel_permutation = { 'hotel1': hotel1, 'hotel2': hotel2, 'total': day1['minRate'] + day2['minRate']}
 				hotel_list.append(hotel_permutation)
 			
@@ -79,7 +98,12 @@ def result(request):
 		response = requests.get(url).json()
 
 		for day1 in response:
-			hotel1 = {'code': day1['hotelCode'], 'lowrate': day1['minRate']}
+			data, desc = HotelES().getVenueName(day1['hotelName'])
+			if 'images' in data:
+				img = data['@giataId'] + ".jpg"
+			else:
+				img = False
+			hotel1 = {'code': day1['hotelCode'], 'name': day1['hotelName'], 'rating':day1['starRating'],'lowrate': day1['minRate'],'img':img,'desc': desc[0]['para']}
 			hotel_permutation = { 'hotel1': hotel1, 'total': day1['minRate']}
 			hotel_list.append(hotel_permutation)
 
